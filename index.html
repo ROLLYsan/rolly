@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>基地殴り資源計算ツール</title>
+    <title>資源分配計算ツール</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
         table { margin: 20px auto; border-collapse: collapse; width: 50%; }
@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <h2>基地殴り資源計算ツール</h2>
+    <h2>資源分配計算ツール</h2>
     <table>
         <tr>
             <th>資源</th>
@@ -40,6 +40,7 @@
     <label>最大輸送量: <input type="number" id="maxTransport" step="0.1"></label>
     <br>
     <button onclick="calculateDistribution()">計算</button>
+    <button onclick="resetValues()">リセット</button> <!-- リセットボタンを追加 -->
     
     <script>
         function calculateDistribution() {
@@ -75,6 +76,20 @@
 
             // 合計値の調整確認（最大輸送量と一致すること）
             console.log(`Iron: ${ironShare}, Food: ${foodShare}, Gold: ${goldShare}, Total: ${ironShare + foodShare + goldShare}`);
+        }
+
+        // リセット機能
+        function resetValues() {
+            // 入力フィールドをゼロにリセット
+            document.getElementById("iron").value = 0;
+            document.getElementById("food").value = 0;
+            document.getElementById("gold").value = 0;
+            document.getElementById("maxTransport").value = 0;
+
+            // 獲得資源量を「-」にリセット
+            document.getElementById("ironResult").innerText = "-";
+            document.getElementById("foodResult").innerText = "-";
+            document.getElementById("goldResult").innerText = "-";
         }
     </script>
 </body>
