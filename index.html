@@ -56,11 +56,11 @@
             let foodShare = (food / total) * maxTransport;
             let goldShare = (gold / total) * maxTransport;
 
-            // 合計が最大輸送量を超えないように調整
+            // 各資源の分配後の合計
             let totalShare = ironShare + foodShare + goldShare;
-            let adjustment = maxTransport - totalShare;
 
-            // 調整値を金貨に追加して最終的な計算を行う
+            // 合計が最大輸送量に達していない場合、差額を金貨に追加
+            let adjustment = maxTransport - totalShare;
             goldShare += adjustment;
 
             // 小数点以下1桁で表示
