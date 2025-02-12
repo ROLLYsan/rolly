@@ -50,23 +50,26 @@
             
             let total = iron + food + gold;
             if (total === 0 || maxTransport === 0) return;
-            
+
             // 各資源の分配量を小数点以下まで計算
             let ironShare = (iron / total) * maxTransport;
             let foodShare = (food / total) * maxTransport;
             let goldShare = (gold / total) * maxTransport;
 
-            // 各資源の分配後の合計
+            // 合計が最大輸送量に一致しない場合、誤差を調整
             let totalShare = ironShare + foodShare + goldShare;
-
-            // 合計が最大輸送量に達していない場合、差額を金貨に追加
             let adjustment = maxTransport - totalShare;
+
+            // 調整を金貨に追加
             goldShare += adjustment;
 
             // 小数点以下1桁で表示
             document.getElementById("ironResult").innerText = ironShare.toFixed(1);
             document.getElementById("foodResult").innerText = foodShare.toFixed(1);
             document.getElementById("goldResult").innerText = goldShare.toFixed(1);
+
+            // 合計値の調整確認（最大輸送量と一致すること）
+            console.log(`Total: ${totalShare}, Adjustment: ${adjustment}, Final Total: ${ironShare + foodShare + goldShare}`);
         }
     </script>
 </body>
