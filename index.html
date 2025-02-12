@@ -49,15 +49,24 @@
             let maxTransport = parseFloat(document.getElementById("maxTransport").value) || 0;
             
             let total = iron + food + gold;
-            if (total === 0) return;
+            if (total === 0 || maxTransport === 0) return;
             
-            let ironShare = ((iron / total) * maxTransport).toFixed(1); // 小数点以下1桁
-            let foodShare = ((food / total) * maxTransport).toFixed(1); // 小数点以下1桁
-            let goldShare = (maxTransport - (parseFloat(ironShare) + parseFloat(foodShare))).toFixed(1); // 小数点以下1桁と調整
-            
-            document.getElementById("ironResult").innerText = ironShare;
-            document.getElementById("foodResult").innerText = foodShare;
-            document.getElementById("goldResult").innerText = goldShare;
+            // 各資源の分配量を小数点以下まで計算
+            let ironShare = (iron / total) * maxTransport;
+            let foodShare = (food / total) * maxTransport;
+            let goldShare = (gold / total) * maxTransport;
+
+            // 合計が最大輸送量を超えないように調整
+            let totalShare = ironShare + foodShare + goldShare;
+            let adjustment = maxTransport - totalShare;
+
+            // 調整値を金貨に追加して最終的な計算を行う
+            goldShare += adjustment;
+
+            // 小数点以下1桁で表示
+            document.getElementById("ironResult").innerText = ironShare.toFixed(1);
+            document.getElementById("foodResult").innerText = foodShare.toFixed(1);
+            document.getElementById("goldResult").innerText = goldShare.toFixed(1);
         }
     </script>
 </body>
